@@ -1,0 +1,44 @@
+<div class="page-container">
+  <main>
+    <section>
+      <div class="row col-12 text-center loginDiv">
+        <p-tabView>
+          <p-tabPanel header="Crear usuario">
+            <form [formGroup]="formRegister" class="formulario" (ngSubmit)="saveUser()">
+              <div class="label-up col-12 col-md-6">
+                <label for="nickname">Introduzca su alias</label>
+                <input class="input-propio" id="nickname" name="nickname" formControlName="nickname" type="text" placeholder="Nickname" required="true" />
+              </div>
+              <div class="label-up col-12 col-md-6">
+                <label for="email">Introduzca su email</label>
+                <input class="input-propio" id="email" name="email" formControlName="email" type="text" placeholder="Email" required="true" />
+              </div>
+              <div class="label-up col-12 col-md-6">
+                <label for="password">Introduzca su contraseña</label>
+                <input class="input-propio" id="password" name="password" formControlName="password" type="password" placeholder="Contraseña" required="true" />
+              </div>
+              <div class="label-up col-12 col-md-6 text-center">
+                <button id="btn-propio" pButton class="primary" type="submit">Confirmar</button>
+              </div>
+            </form>
+          </p-tabPanel>
+          <p-tabPanel header="Login">
+            <form [formGroup]="formRegister" class="formulario" (ngSubmit)="getUser()">
+              <div class="label-up col-12 col-md-6">
+                <label for="email">Introduzca su email</label>
+                <input class="input-propio" id="email" name="email" formControlName="email" type="text" placeholder="Email" required="true" />
+              </div>
+              <div class="label-up col-12 col-md-6">
+                <label for="password">Introduzca su contraseña</label>
+                <input class="input-propio" id="password" name="password" formControlName="password" type="password" placeholder="Contraseña" required="true" />
+              </div>
+              <div class="label-up col-12 col-md-6 text-center">
+                <button id="btn-propio" pButton class="primary" type="submit">Confirmar</button>
+              </div>
+            </form>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </section>
+  </main>
+</div>

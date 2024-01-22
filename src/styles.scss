@@ -1,0 +1,49 @@
+body {
+margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('./assets/Fondo.jpg') center center fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.label-up {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    margin: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #e44d26;
+    font-family: 'Arial', sans-serif;
+}
+  
+.input-propio {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff !important;
+}
+  
+#btn-propio {
+    width: 100%;
+    padding: 12px;
+    background-color: #e44d26;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    justify-content: center;
+}
