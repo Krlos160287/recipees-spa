@@ -1,1 +1,33 @@
-<p>recipees works!</p>
+<div class="div-buttons">
+    <button pButton class="primary btn-propio" type="submit" icon="pi pi-pencil"  (click)="showModal()">Nueva Receta</button>
+    <button pButton class="primary btn-propio" type="submit" icon="pi pi-sign-out"  (click)="logout()">Salir</button>
+</div>
+
+<p-table [value]="[]" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th id="code">Code</th>
+            <th id="name">Name</th>
+            <th id="category">Category</th>
+            <th id="quantity">Quantity</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.quantity }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog
+    header="Nueva receta"
+    [(visible)]="display"
+    [blockScroll]="false"
+    [style]="{ height: '800px', width: '1200px' }"
+    [modal]="true"
+>
+<app-recipee-modal></app-recipee-modal>
+</p-dialog>

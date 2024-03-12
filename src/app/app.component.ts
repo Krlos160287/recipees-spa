@@ -17,19 +17,10 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-    private service: AppComponentService,
-
+  
   ) {}
 
   ngOnInit(): void {
-    this.getService();
   }
 
-  getService() {
-    this.service.getAll().pipe(take(1)).subscribe((resp) => {
-      resp.forEach((element: any) => {
-        this.categorias.push(element.categoria)
-      })
-    })
-  }
 }

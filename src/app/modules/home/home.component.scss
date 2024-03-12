@@ -23,3 +23,13 @@
     margin: 0 auto;
     max-width: 400px;
 }
+
+.div-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+::ng-deep .p-tabview .p-tabview-nav {
+    justify-content: center;
+}

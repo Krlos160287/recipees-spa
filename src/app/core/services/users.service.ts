@@ -20,10 +20,6 @@ import { environment } from "src/environments/environment";
         headers: {
           'Content-Type': 'application/json',
           // Authorization: token !== null ? 'Bearer ' + token : '',
-          'x-access-token': '',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'GET',
-          'Access-Control-Allow-Origin': '*',
           },
         }
       return this.http.post<UsersModel>(`${this.endpoint}`+ "/users", user, { headers: httpOptions.headers });
