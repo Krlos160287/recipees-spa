@@ -3,6 +3,7 @@ export interface RecetaModel {
     nombre: string;
     products: Producto[];
     steps: string;
+    createdBy?: string;
 }
 
 export interface Producto {
