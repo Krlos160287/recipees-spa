@@ -3,21 +3,23 @@
     <button pButton class="primary btn-propio" type="submit" icon="pi pi-sign-out"  (click)="logout()">Salir</button>
 </div>
 
-<p-table [value]="[]" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="recipees" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
-            <th id="code">Code</th>
-            <th id="name">Name</th>
-            <th id="category">Category</th>
-            <th id="quantity">Quantity</th>
+            <th id="nombre">Nombre receta</th>
+            <th id="acciones">Acciones</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-recipee>
         <tr>
-            <td>{{ product.code }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
-            <td>{{ product.quantity }}</td>
+            <td>{{ recipee.nombre }}</td>
+            <td>
+                <div class="div-buttons-table">
+                    <button pButton class="primary btn-propio2" type="submit" icon="pi pi-pencil"  (click)="selectRecipee(recipee)">Editar</button>
+                    <button pButton class="primary btn-propio2" type="submit" icon="pi pi-trash"  (click)="selectRecipee(recipee)">Eliminar</button>
+                    <button pButton class="primary btn-propio2" type="submit" icon="pi pi-file-pdf"  (click)="selectRecipee(recipee)">Exportar PDF</button>
+                </div>
+            </td>
         </tr>
     </ng-template>
 </p-table>
@@ -29,5 +31,5 @@
     [style]="{ height: '800px', width: '1200px' }"
     [modal]="true"
 >
-<app-recipee-modal></app-recipee-modal>
+<app-recipee-modal (closeDialogEvent)="closeDialog()"></app-recipee-modal>
 </p-dialog>

@@ -77,6 +77,7 @@ export class HomeComponent {
     pipe(take(1))
     .subscribe({
       next: (response: any) => {
+        localStorage.setItem('userMail', this.formRegister.controls['email'].value);
         this.router.navigate(['/recetas']);
       },
       error: (error: any) => {
