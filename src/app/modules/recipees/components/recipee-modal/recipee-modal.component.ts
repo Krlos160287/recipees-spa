@@ -41,7 +41,8 @@ export class RecipeeModalComponent implements OnInit{
   recipee: RecetaModel = {
     nombre: '',
     products: [],
-    steps: ''
+    steps: '',
+    createdBy: ''
   };
 
   formRecipees!: FormGroup;
