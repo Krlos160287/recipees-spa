@@ -24,6 +24,7 @@ export class AuthService {
   }
 
   logout(): void {
+    localStorage.removeItem('userMail');
     localStorage.removeItem(this.localStorageKey);
   }
 

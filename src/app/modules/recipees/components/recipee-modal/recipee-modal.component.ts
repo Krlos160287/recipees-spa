@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -28,6 +28,8 @@ interface Seleccion {
 export class RecipeeModalComponent implements OnInit{
   @ViewChild('TablaIngredientes') tableIngredientes: Table | undefined;
 
+  @Output() closeDialogEvent = new EventEmitter<void>();
+
   items: MenuItem[] = [];
 
   activeIndex: number = 0;
@@ -55,7 +57,7 @@ export class RecipeeModalComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
-    private recipeesService: RecipeesService
+    private recipeesService: RecipeesService,
   ) {
     this.formRecipees = this.fb.group({
       selectedIngredients: ['',]
@@ -137,7 +139,6 @@ export class RecipeeModalComponent implements OnInit{
     }
     else {
       this.activeIndex ++;
-      console.log(this.selecciones);
     }
   }
 
@@ -146,7 +147,7 @@ export class RecipeeModalComponent implements OnInit{
     
     this.recipeesService.saveRecipee(this.recipee).pipe(take(1))
     .subscribe({
-      next: console.log,
+      next: () => {this.closeDialogEvent.emit()},
       error: console.error
     });
   }
