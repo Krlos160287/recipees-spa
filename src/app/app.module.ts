@@ -7,7 +7,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModulesFromPrime } from './shared/shared.module';
-import { RecipeesComponent } from './modules/recipees/recipees.component';
+import { authInterceptor, errorHandlerInterceptor } from './core/interceptors/interceptors';
+import { ErrorService } from './core/services/error.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -16,7 +17,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeesComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       defaultLanguage: 'es',
     }),
   ],
-  providers: [HttpClientModule,],
+  providers: [HttpClientModule, authInterceptor, errorHandlerInterceptor, ErrorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

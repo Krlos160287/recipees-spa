@@ -35,7 +35,7 @@ label {
     background-color: #fff !important;
 }
   
-#btn-propio {
+.btn-propio {
     width: 100%;
     padding: 12px;
     background-color: #e44d26;
@@ -46,4 +46,9 @@ label {
     font-family: 'Arial', sans-serif;
     font-weight: bold;
     justify-content: center;
+    gap: 0.5rem;
+}
+
+h5 {
+    margin: 0 0 0.5rem;
 }

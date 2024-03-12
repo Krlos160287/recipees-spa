@@ -13,22 +13,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: { email: string; password: string }): Observable<{ access_token: string }> {
-    const httpOptions = {
-        headers: {
-          'Content-Type': 'application/json',
-          // Authorization: token !== null ? 'Bearer ' + token : '',
-          'x-access-token': '',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'GET',
-          'Access-Control-Allow-Origin': '*',
-          },
-        }
+  login(credentials: { email: string; password: string }): Observable<{ token: any }> {
 
-    return this.http.post<{ access_token: string }>(`${this.endpoint}/users/login`, credentials, { headers: httpOptions.headers })
+    return this.http.post<{ token: string }>(`${this.endpoint}/login`, credentials)
       .pipe(
         tap(response => {
-          localStorage.setItem(this.localStorageKey, response.access_token);
+          localStorage.setItem(this.localStorageKey, response.token);
         })
       );
   }
