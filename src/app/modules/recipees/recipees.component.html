@@ -15,7 +15,7 @@
             <td>{{ recipee.nombre }}</td>
             <td>
                 <div class="div-buttons-table">
-                    <button pButton class="primary btn-propio2" type="submit" icon="pi pi-pencil"  (click)="selectRecipee(recipee)">Editar</button>
+                    <button pButton class="primary btn-propio2" type="submit" icon="pi pi-pencil"  (click)="editRecipee(recipee)">Editar</button>
                     <button pButton class="primary btn-propio2" type="submit" icon="pi pi-trash"  (click)="selectRecipee(recipee)">Eliminar</button>
                     <button pButton class="primary btn-propio2" type="submit" icon="pi pi-file-pdf"  (click)="selectRecipee(recipee)">Exportar PDF</button>
                 </div>
@@ -30,6 +30,23 @@
     [blockScroll]="false"
     [style]="{ height: '800px', width: '1200px' }"
     [modal]="true"
+    [closable]="false"
 >
 <app-recipee-modal (closeDialogEvent)="closeDialog()"></app-recipee-modal>
+</p-dialog>
+
+<p-dialog
+    header="Editar receta"
+    [(visible)]="displayEdit"
+    [blockScroll]="false"
+    [style]="{ height: '800px', width: '1200px' }"
+    [modal]="true"
+    [closable]="false"
+>
+<app-recipee-modal
+[recipeeEdit]="selectedRecipee"
+[edit]="displayEdit"
+(closeDialogEvent)="closeDialog()"
+>
+</app-recipee-modal>
 </p-dialog>
