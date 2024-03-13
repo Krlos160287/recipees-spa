@@ -101,12 +101,25 @@ export class RecipeeModalComponent implements OnInit{
   selectsOptions(event: any, categoria: string) {
     const ingredientesSeleccionados = event.value;
 
-    const seleccionExistente = this.selecciones.find(sel => sel.categoria === categoria);
-
-    if (seleccionExistente) {
-      seleccionExistente.ingredientesSeleccionados = ingredientesSeleccionados;
+    if(!this.edit) {
+      const seleccionExistente = this.selecciones.find(sel => sel.categoria === categoria);
+  
+      if (seleccionExistente) {
+        seleccionExistente.ingredientesSeleccionados = ingredientesSeleccionados;
+      } else {
+        this.selecciones.push({ categoria, ingredientesSeleccionados });
+      }
     } else {
-      this.selecciones.push({ categoria, ingredientesSeleccionados });
+      let seleccionExistente;
+
+      let filtro = ingredientesSeleccionados.forEach((elem: string) => {
+        seleccionExistente = this.recipeeEdit.products.find(sel => sel.nombre === elem);
+      })
+      if(seleccionExistente) {
+        return;
+      } else {
+        this.selecciones.push({categoria, ingredientesSeleccionados});
+      }
     }
   }
 
@@ -178,13 +191,25 @@ export class RecipeeModalComponent implements OnInit{
     if(!this.edit) {
       this.recipeesService.saveRecipee(this.recipee).pipe(take(1))
       .subscribe({
-        next: () => {this.closeDialogEvent.emit()},
+        next: () => {
+          this.closeDialogEvent.emit();
+          this.activeIndex = 0;
+          this.selecciones = [];
+          this.ingredientes = [];
+          this.productos = [];
+        },
         error: console.error
       });
     } else {
       this.recipeesService.updateRecipee(this.recipee).pipe(take(1))
       .subscribe({
-        next: () => {this.closeDialogEvent.emit()},
+        next: () => {
+          this.closeDialogEvent.emit();
+          this.activeIndex = 0;
+          this.selecciones = [];
+          this.ingredientes = [];
+          this.productos = [];
+        },
         error: console.error
       });
     }
@@ -196,5 +221,12 @@ export class RecipeeModalComponent implements OnInit{
     this.ingredientes = [];
     this.productos = [];
     this.closeDialogEvent.emit();
+  }
+
+  quitIngredient(event: Producto) {
+    let filtro = this.productos.filter((x) => x.nombre !== event.nombre);
+    if(filtro) {
+      this.productos = filtro;
+    }
   }
 }

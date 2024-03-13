@@ -34,6 +34,7 @@
                     <th id="producto">Producto</th>
                     <th id="cantidad">Cantidad</th>
                     <th id="medida">Unidad medida</th>
+                    <th *ngIf="edit" id="acciones">Acciones</th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-producto>
@@ -50,6 +51,9 @@
                         >
                         
                         </p-dropdown>
+                    </td>
+                    <td *ngIf="edit">
+                        <button pButton class="primary btn-propio" type="submit" icon="pi pi-trash" (click)="quitIngredient(producto)">Eliminar</button>
                     </td>
                   </tr>
                 </ng-template>
