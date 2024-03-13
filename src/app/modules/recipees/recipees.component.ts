@@ -14,7 +14,11 @@ export class RecipeesComponent implements OnInit{
 
   display: boolean = false;
 
+  displayEdit: boolean = false;
+
   recipees: RecetaModel[] = [];
+
+  selectedRecipee!: RecetaModel;
 
   constructor(
     private authService: AuthService,
@@ -46,7 +50,13 @@ export class RecipeesComponent implements OnInit{
   
   closeDialog() {
     this.display = false;
+    this.displayEdit = false;
     this.getRecipeesByUserName();
+  }
+
+  editRecipee(recipee: RecetaModel) {
+    this.selectedRecipee = recipee;
+    this.displayEdit = true;
   }
 
   selectRecipee(recipee: RecetaModel) {

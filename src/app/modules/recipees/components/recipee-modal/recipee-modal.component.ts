@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -27,6 +27,9 @@ interface Seleccion {
 })
 export class RecipeeModalComponent implements OnInit{
   @ViewChild('TablaIngredientes') tableIngredientes: Table | undefined;
+
+  @Input() recipeeEdit!: RecetaModel;
+  @Input() edit: boolean = false;
 
   @Output() closeDialogEvent = new EventEmitter<void>();
 
@@ -128,6 +131,33 @@ export class RecipeeModalComponent implements OnInit{
   }
   
   nextStep() {
+    if(!this.edit) {
+      this.forwardPageCreate();
+    } else {
+      this.forWardPageEdit();
+    }
+  }
+
+  forWardPageEdit() {
+    if(this.activeIndex == 0 ) {
+      const supplies = this.recipeeEdit.products;
+      this.getIngredientsList();
+      if(this.productos.length == 0) {
+        this.productos = supplies;
+      } else {
+        this.productos = this.productos.concat(supplies);
+      }
+      this.activeIndex++;
+    } else if (this.activeIndex == 1 ) {
+      this.recipee = this.recipeeEdit;
+      this.productos = this.tableIngredientes!.value;
+      this.activeIndex++;
+    } else {
+      this.activeIndex++;
+    }
+  }
+
+  forwardPageCreate() {
     if(this.activeIndex === 0 && this.selecciones.length == 0) {
       console.log("ERROR");
     } else if (this.activeIndex === 0 && this.selecciones.length > 0) {
@@ -144,11 +174,27 @@ export class RecipeeModalComponent implements OnInit{
 
   confirm() {
     this.recipee.products = this.productos;
-    
-    this.recipeesService.saveRecipee(this.recipee).pipe(take(1))
-    .subscribe({
-      next: () => {this.closeDialogEvent.emit()},
-      error: console.error
-    });
+
+    if(!this.edit) {
+      this.recipeesService.saveRecipee(this.recipee).pipe(take(1))
+      .subscribe({
+        next: () => {this.closeDialogEvent.emit()},
+        error: console.error
+      });
+    } else {
+      this.recipeesService.updateRecipee(this.recipee).pipe(take(1))
+      .subscribe({
+        next: () => {this.closeDialogEvent.emit()},
+        error: console.error
+      });
+    }
+  }
+
+  closeModal() {
+    this.activeIndex = 0;
+    this.selecciones = [];
+    this.ingredientes = [];
+    this.productos = [];
+    this.closeDialogEvent.emit();
   }
 }

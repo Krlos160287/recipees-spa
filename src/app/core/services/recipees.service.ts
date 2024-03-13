@@ -24,4 +24,8 @@ export class RecipeesService {
     public getRecipeesByUser(userMail: string): Observable<RecetaModel[]> {
       return this.http.get<RecetaModel[]>(`${this.endpoint}/recipees/${userMail}`);
     }
+
+    public updateRecipee(body: RecetaModel): Observable<void> {
+      return this.http.put<void>(`${this.endpoint}/recipees/${body.id}`, body);
+    }
 }
