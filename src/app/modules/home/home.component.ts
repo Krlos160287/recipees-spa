@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { UsersModel } from 'src/app/models/users.model';
+import { TabViewModule } from 'primeng/tabview';
+import { ButtonModule } from 'primeng/button';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: true,
+    imports: [NgIf, ButtonModule, TabViewModule, FormsModule, ReactiveFormsModule]
 })
 export class HomeComponent {
 
