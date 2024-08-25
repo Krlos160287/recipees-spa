@@ -1,10 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
-import { Table } from 'primeng/table';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { MenuItem, SharedModule } from 'primeng/api';
+import { Table, TableModule } from 'primeng/table';
 import { take } from 'rxjs';
 import { RecipeesService } from 'src/app/core/services/recipees.service';
 import { RecetaModel, Producto } from '../../recipee.model';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { NgIf, NgFor } from '@angular/common';
+import { StepsModule } from 'primeng/steps';
 
 export interface Categoria {
   categoria: string;
@@ -21,9 +27,11 @@ interface Seleccion {
 }
 
 @Component({
-  selector: 'app-recipee-modal',
-  templateUrl: './recipee-modal.component.html',
-  styleUrls: ['./recipee-modal.component.scss']
+    selector: 'app-recipee-modal',
+    templateUrl: './recipee-modal.component.html',
+    styleUrls: ['./recipee-modal.component.scss'],
+    standalone: true,
+    imports: [StepsModule, NgIf, NgFor, MultiSelectModule, ButtonModule, TableModule, SharedModule, FormsModule, DropdownModule, InputTextareaModule]
 })
 export class RecipeeModalComponent implements OnInit{
   @ViewChild('TablaIngredientes') tableIngredientes: Table | undefined;

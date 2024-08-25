@@ -4,11 +4,18 @@ import { take } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RecipeesService } from 'src/app/core/services/recipees.service';
 import { RecetaModel } from './recipee.model';
+import { RecipeeModalComponent } from './components/recipee-modal/recipee-modal.component';
+import { DialogModule } from 'primeng/dialog';
+import { SharedModule } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-recipees',
-  templateUrl: './recipees.component.html',
-  styleUrls: ['./recipees.component.scss']
+    selector: 'app-recipees',
+    templateUrl: './recipees.component.html',
+    styleUrls: ['./recipees.component.scss'],
+    standalone: true,
+    imports: [ButtonModule, TableModule, SharedModule, DialogModule, RecipeeModalComponent]
 })
 export class RecipeesComponent implements OnInit{
 
