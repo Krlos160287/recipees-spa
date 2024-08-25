@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { RecetaModel } from "src/app/modules/recipees/recipee.model";
 import { environment } from "src/environments/environment";
 
@@ -26,6 +26,21 @@ export class RecipeesService {
     }
 
     public updateRecipee(body: RecetaModel): Observable<void> {
-      return this.http.put<void>(`${this.endpoint}/recipees/${body.id}`, body);
+      return this.http.put<void>(`${this.endpoint}/recipees`, body);
+    }
+
+    public deleteRecipee(body: RecetaModel) : Observable<void> {
+      return this.http.delete<void>(`${this.endpoint}/recipees/${body.id}`);
+    }
+
+    public getRecipeePDF(body: RecetaModel) : Observable<any> {
+      return this.http.get(`${this.endpoint}/recipees/pdf/${body.id}`, {
+        responseType: 'blob'
+      }).pipe(
+        tap((blob: Blob) => {
+          const blobUrl = URL.createObjectURL(blob);
+          window.open(blobUrl, '_blank');
+        })
+      );
     }
 }

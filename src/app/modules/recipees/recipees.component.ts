@@ -58,9 +58,23 @@ export class RecipeesComponent implements OnInit{
     this.selectedRecipee = recipee;
     this.displayEdit = true;
   }
+  
+  deleteRecipee(recipee: RecetaModel) {
+    this.recipeesService.deleteRecipee(recipee).pipe(take(1))
+    .subscribe({
+      next: () => {
+        this.getRecipeesByUserName();
+      },
+      error: console.error
+    });
+  }
 
-  selectRecipee(recipee: RecetaModel) {
-    console.log(recipee);
+  getRecipeePDF(recipee: RecetaModel) {
+    this.recipeesService.getRecipeePDF(recipee).pipe(take(1))
+    .subscribe({
+      next: console.log,
+      error: console.error
+    });
   }
 }
 
